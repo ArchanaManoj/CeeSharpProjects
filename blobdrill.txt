@@ -1,0 +1,53 @@
+namespace Blob_Drill
+{
+    class Program
+    {
+        static void TextToImage()
+        {
+            byte[] file = File.ReadAllBytes(@"file_byte.txt");
+            using (MemoryStream memory = new MemoryStream(file))
+            {
+                using (BinaryReader reader = new BinaryReader(memory))
+                {
+                    using (BinaryWriter writer = new BinaryWriter(
+                        File.Open("new_file.png", FileMode.Create)))
+                        // Read in each byte from memory.
+                        for (int i = 0; i < file.Length; i++)
+                        {
+                            byte result = reader.ReadByte();
+                            writer.Write(result);
+
+                        }
+                }
+            }
+        }
+        static void ImageToText()
+        {
+            byte[] file = File.ReadAllBytes(@"C:\Personal\Tech Academy\CeeSharp\C#Drills\Cannon_thumb.jpg");
+
+            // Create a memory stream from those bytes.
+            using (MemoryStream memory = new MemoryStream(file))
+            {
+                // Use the memory stream in a binary reader.
+                using (BinaryReader reader = new BinaryReader(memory))
+                {
+                    using (BinaryWriter writer = new BinaryWriter(
+                        File.Open("file_byte.txt", FileMode.Create)))
+                        // Read in each byte from memory.
+                        for (int i = 0; i < file.Length; i++)
+                        {
+                            byte result = reader.ReadByte();
+                            writer.Write(result);
+                        }
+                }
+            }
+        }
+        static void Main(string[] args)
+        {
+
+            //ImageToText();
+            TextToImage();
+            
+        }
+    }
+}

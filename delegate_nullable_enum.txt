@@ -1,0 +1,73 @@
+namespace Delegate_Nullable_Enum
+{
+    delegate void person(string a);
+    delegate void Calc(int num1, int num2);
+    
+        enum Days { Sunday,Monday,Tuesday,Wednesday,Thursday, Friday, Saturday};
+        enum Colors {Peach,Ochre,Purple,Indigo,Olive,Sunset};
+    
+    class Program
+    {
+        public static void greeting1(string b)
+        {
+            Console.WriteLine("Goodmorning!"+b);
+        }
+        public static void greeting2(string c)
+        {
+            Console.WriteLine("Goodnight!"+c);
+        }
+
+
+        public static void Add(int num1, int num2)
+        {
+            Console.WriteLine(num1 + num2);
+        }
+        public static void Sub(int num1, int num2)
+        {
+            Console.WriteLine(num1 - num2);
+        }
+        public static void Mul(int num1, int num2)
+        {
+            Console.WriteLine(num1*num2);
+        }
+        public static void Div(int num1, int num2)
+        {
+            Console.WriteLine(num1/num2);
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter first number");
+            int n1 = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter second number");
+            int n2 = int.Parse(Console.ReadLine());
+            //creating delegate instances
+            Calc op1 = new Calc(Add);
+            Calc op2 = new Calc(Sub);
+            Calc op3 = new Calc(Mul);
+            Calc op4 = new Calc(Div);
+            op1(n1, n2);
+            op2(n1, n2);
+            op3(n1, n2);
+            op4(n1, n2);
+            //creating delegate instances
+            person p1, p2;
+            p1 = greeting1;
+            p2 = greeting2;
+            p1("Alice!");
+            p2("Peter");
+            //declaring nullable types
+            int? number1 = null;
+            int? number2 = 34;
+            double? number3 = new double?();
+
+            Console.WriteLine("These nullable typed data: " + number1 +","+ number2+"," + number3);
+            //enum instances
+            Days eg1 = Days.Monday;
+            Days eg2 = Days.Thursday;
+            Colors eg3 = Colors.Peach;
+            Colors eg4 = Colors.Purple;
+
+            Console.WriteLine(eg1 + "," + eg2 + "," + eg3 + "," + eg4);
+        }
+    }
+}

@@ -1,0 +1,57 @@
+namespace Program2
+{
+    //creating class to test overloading
+    public class OvrLoadTest
+    {
+        public void Total(double num1, double num2)
+        {
+            var sum = num1 + num2;
+            Console.WriteLine("Sum is: " + sum);
+        }
+
+        public void Total(string a, string b)
+        {
+            var joined = a + b;
+            Console.WriteLine("Joined String: " + joined);
+        }
+    }
+    //creating classes Test and OvrRideTest to test overriding
+    public class Test
+    {
+        public virtual void Greeting()
+        {
+            Console.WriteLine("It is a beautiful day!");
+        }
+    }
+
+    public class OvrRideTest : Test
+    {
+        public override void Greeting()
+        {
+            Console.WriteLine("This overrides the method in class Test!");
+        }
+    }
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Please Enter Your Name: ");
+            var input = Console.ReadLine();
+            Console.WriteLine("Hello, " + input);
+            //creating instances of classes OvrloadTest, OvrRideTest and Test
+            OvrLoadTest tst1 = new OvrLoadTest();
+            tst1.Total(3, 4);
+            Console.WriteLine("Overloading method...");
+            tst1.Total("Good","Morning");
+            OvrRideTest tst2 = new OvrRideTest();
+            
+            Test tst3 = new Test();
+            tst3.Greeting();
+            Console.WriteLine("OverRiding...");
+            tst2.Greeting();
+            
+        }
+
+        
+    }
+    

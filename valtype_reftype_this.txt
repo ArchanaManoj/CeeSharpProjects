@@ -1,0 +1,66 @@
+namespace Valtyp_RefTyp_this
+{
+    public class ChkThis
+    {
+        public string name = "Bradley";
+        public void Chnge()
+        {
+            this.name = "Bruce Lee";
+            Console.WriteLine(this.name);
+        }
+    }
+    //creating reference type
+    public class RefType
+    {
+       public string name;
+       public int age;
+    }
+    public struct Val_type
+    {
+       public string name;
+       public int age;
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            RefType person1 = new RefType();
+            RefType person11 = new RefType();
+            Val_type person2 = new Val_type();
+            Val_type person22 = new Val_type();
+            person1.name = "Martha";
+            person1.age = 35;
+            person11.name = "Abernathy";
+            person11.age = 36;
+            person2.name = "Mary";
+            person2.age = 43;
+            person22.name = "Cash";
+            person22.age = 42;
+            //before equating
+            Console.WriteLine("This is class -- reference type ");
+            Console.WriteLine(person1.name+",:"+ person1.age+","+person11.name+":"+person11.age);
+            Console.WriteLine("This is struct -- value type ");
+            Console.WriteLine(person2.name + ",:" + person2.age + "," + person22.name + ":" + person22.age);
+            Console.WriteLine("Now equating the members");
+            person11 = person1;
+            person22 = person2;
+            //after equating
+            Console.WriteLine("This is class -- reference type ");
+            Console.WriteLine(person1.name + ",:" + person1.age + "," + person11.name + ":" + person11.age);
+            Console.WriteLine("This is struct -- value type ");
+            Console.WriteLine(person2.name + ",:" + person2.age + "," + person22.name + ":" + person22.age);
+            Console.WriteLine("Put new value in one member");
+            person11.name = "Angel";
+            person11.age = 54;
+            person22.name = "Stan";
+            person22.age = 67;
+            Console.WriteLine(person1.name + ",:" + person1.age + "," + person11.name + ":" + person11.age);
+            Console.WriteLine(person2.name + ",:" + person2.age + "," + person22.name + ":" + person22.age);
+
+            //checking this keyword
+            ChkThis person = new ChkThis();
+            Console.WriteLine(person.name);
+            person.Chnge();
+        }
+    }
+}

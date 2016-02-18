@@ -1,0 +1,63 @@
+//creating interface
+    public interface IOp1
+    {
+        double Sub(double num1, double num2);
+    }
+    class NumGet
+    {
+        public double Number1 { get; set; }
+        public double Number2 { get; set; }
+        
+    }
+    //cannot achieve multiple inheritance
+    //cannot be instantiated, used when common functionality needs to be shared among classes
+    abstract class Operation
+    {
+        public double Add(double num1, double num2)
+        {
+            return num1 + num2;
+        }
+    }
+    //inheriting from both abstract class and interface
+    class Calc : Operation,IOp1
+    {
+        public double Mult(double num1,double num2)
+        {
+            return num1 * num2;
+        }
+        public double Sub(double num1,double num2)
+        {
+            return num1 - num2;
+        }
+        
+    }
+    //multiple inheritance
+    class Calc2: IOp1
+    {
+        public double Sub(double num1, double num2)
+        {
+            return num1 - num2;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            NumGet n = new NumGet();
+            n.Number1 = 12;
+            n.Number2 = 6;
+            Calc c = new Calc();
+            
+            //c.Mult(n.Number1, n.Number2);
+            Console.WriteLine(n.Number1 + "+" + n.Number2 + "=" + c.Add(n.Number1, n.Number2));
+            Console.WriteLine(n.Number1 + "x" + n.Number2 + "=" + c.Mult(n.Number1, n.Number2));
+            Console.WriteLine(n.Number1 + "-" + n.Number2 + "=" + c.Sub(n.Number1, n.Number2));
+
+            Calc2 c2 = new Calc2();
+            Console.WriteLine("Invoking the second class inheriting from interface");
+
+            Console.WriteLine(n.Number1 + "-" + n.Number2 + "=" + c2.Sub(n.Number1, n.Number2));
+
+
+        }
+    }

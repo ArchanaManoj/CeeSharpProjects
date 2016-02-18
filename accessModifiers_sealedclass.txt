@@ -1,0 +1,104 @@
+namespace DrillOnClass
+{
+    public class ParentCls
+    {
+        public void ex1()
+        {
+            Console.WriteLine("Inside Parent Class");
+        }
+    }
+    // derived class
+    public class DerivdCls : ParentCls
+    {
+        public void ex2()
+        {
+            Console.WriteLine("Inside Derived Class");
+        }
+    }
+    // sealed class, cannot be derived
+    public sealed class AnothrDervd : ParentCls
+    {
+        public void ex3()
+        {
+            Console.WriteLine("Inside sealed Class, derived from Parent class");
+        }
+    }
+
+    //checking access modifiers
+
+    public class ModifierTest
+    {
+        
+         public string txt = "You're in public property";
+        
+        private void verb2()
+        {
+            Console.WriteLine("You're in private property");
+        }
+        internal void verb3()
+        {
+            Console.WriteLine("You're in 'internal' modifier ");
+        }
+        protected internal void verb4()
+        {
+            Console.WriteLine("You're in protected internal modifier");
+        }
+        protected void verb5()
+        {
+            Console.WriteLine("You're in protected property");
+        }
+    }
+    public class dervdcls : ModifierTest
+    {
+        public void trying()
+        {
+            dervdcls dcl = new dervdcls();
+            Console.WriteLine(dcl.txt);
+        }
+        
+    }
+
+    public class NewCls
+    {
+        public void testmod()
+        {
+            ModifierTest mt = new ModifierTest();
+            Console.WriteLine(mt.txt);
+            mt.verb3();//internal
+            mt.verb4();//protected internal
+           // mt.verb2();//cannot be accessed as it has private modifier
+           // mt.verb5();//cannot be used protected modifier
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            ParentCls pc = new ParentCls();
+            DerivdCls dc = new DerivdCls();
+            AnothrDervd ac = new AnothrDervd();
+            Console.WriteLine("Calling Parent Class...");
+            pc.ex1();
+            Console.WriteLine("Calling Derived Class...");
+            dc.ex2();
+            dc.ex1();
+            Console.WriteLine("Calling sealed class, derived from parent class...");
+            ac.ex3();
+            Console.WriteLine("Calling Parent class method through sealed derived class");
+            ac.ex1();
+            dervdcls drv = new dervdcls();//class derived from main modfier test class
+            NewCls ncls = new NewCls();//new class within namespace 
+            Console.WriteLine("Accessing modifier class methods through derived class... ");
+            drv.trying();
+            //drv.verb2();//not accessible private
+            drv.verb3();
+            drv.verb4();
+            //drv.verb5();//not accessible protected 
+            Console.WriteLine("Accessing modifier class methods through new class... ");
+            ncls.testmod();
+
+
+        }
+    }
+}

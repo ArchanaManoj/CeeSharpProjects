@@ -1,0 +1,59 @@
+public interface ITestInterface
+    {
+        void Fibo();
+        int GetNumber();
+        
+    }
+
+    public class InterTake : ITestInterface
+    {
+        private int limit;
+        private int num;
+        private int prev;
+        private int curr;
+        
+        public void Fibo()
+        {
+            num = 1;
+            prev = 1;
+            curr = 1;
+            limit = GetNumber();
+            Console.Write(1 + ",");
+            for (int i=0;i<= limit; i++)
+            {
+                Console.Write(num+",");
+                num = curr + prev;
+                prev =curr;
+                curr = num;
+            }
+        }
+
+        public int GetNumber()
+        {
+            Console.WriteLine("Enter the limit");
+            int limit = int.Parse(Console.ReadLine());
+            return limit;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            InterTake series = new InterTake();
+            series.Fibo();
+            int[] ser = { 2, 3, 4 };
+            Console.WriteLine("Trying to catch the exception");
+           
+            try
+            {
+                for(int i = 0; i <= ser.Length; i++)
+                {
+                    Console.WriteLine(ser[i]);
+                }
+            }
+            catch(Exception e)
+            {
+                throw new IndexOutOfRangeException("The index of array is out of range",e);
+            }
+        }
+    }

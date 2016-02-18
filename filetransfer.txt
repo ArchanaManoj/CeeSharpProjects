@@ -1,0 +1,60 @@
+class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("This program will check files in a folder for modified files and then transfers them!");
+            Console.WriteLine("Please enter the source folder");
+            string source = Console.ReadLine();
+            Console.WriteLine("Please enter the destination folder");
+            string destination = Console.ReadLine();
+            FileCheck(source,destination);
+            Console.WriteLine("File Transfer Complete!");
+        }
+
+        static void FileCheck(string folder1, string folder2)
+        {
+            DateTime day = DateTime.Now;
+            Console.WriteLine("Today is: " + day);
+            
+            //Console.WriteLine("Time in seconds" + lapse.Seconds);
+            string[] files = Directory.GetFiles(folder1);
+            Console.WriteLine("Going to transfer the file");
+            foreach (string file in files)
+            {
+                
+
+                DateTime lastModified = File.GetLastWriteTime(file);
+                TimeSpan lapse = day.Subtract(lastModified);
+                if (lapse.Seconds < (24 * 60 * 60))
+                {
+
+                    //Console.WriteLine("File being moved: "+file+"Modified Time:" +lastModified);
+                    //Console.WriteLine(folder2);
+                    FileMove(file,folder2);
+                }
+                else
+                {
+                    Console.WriteLine("Nothing to Transfer");
+                }
+            }
+
+
+
+        }
+
+        static void FileMove(string filename, string folder2)
+        {
+            //Console.WriteLine("Checking");
+            string[] dest = filename.Split('\\');
+
+            try {
+                File.Move(filename, folder2+"\\"+dest[dest.Length-1]);
+            }
+            catch(IOException e)
+            {
+                Console.WriteLine(e);
+            }
+            
+            }
+        
+    }
